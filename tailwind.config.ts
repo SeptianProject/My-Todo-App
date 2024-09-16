@@ -9,8 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#413ECB",
+      },
+      boxShadow: {
+        custom: "5px 10px 20px rgba(0, 0, 0, 0.40)",
       },
     },
   },
