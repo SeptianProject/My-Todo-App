@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useRef, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 const ThemeContext = createContext<any>(undefined);
 
@@ -24,32 +24,3 @@ export const ThemeProvider = ({ children }:
 export const useTheme = () => {
     return useContext(ThemeContext);
 }
-
-
-// type Theme = {
-//     colors: {
-//         dark: string;
-//         light: string;
-//     }
-// }
-
-// const defaultTheme: Theme = {
-//     colors: {
-//         dark: '#090909',
-//         light: '#ffffff'
-//     }
-// }
-
-// const ThemeContext = createContext<Theme>(defaultTheme);
-
-// export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-
-
-//     return (
-//         <ThemeContext.Provider value={defaultTheme}>
-//             {children}
-//         </ThemeContext.Provider>
-//     )
-// }
-
-// export const useTheme = () => useContext(ThemeContext);
