@@ -12,7 +12,17 @@ type FormFieldProps = {
     rest?: any
 }
 
-const FormField = ({ id, label, placeholder, type, inputRef, theme, txtError, error, rest }: FormFieldProps) => {
+const FormField = ({
+    id,
+    label,
+    placeholder,
+    type,
+    inputRef,
+    theme,
+    txtError,
+    error,
+    rest
+}: FormFieldProps) => {
 
     return (
         <div className='box-border '>

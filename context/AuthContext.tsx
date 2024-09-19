@@ -1,7 +1,4 @@
-'use client'
-import { createContext, useContext } from "react";
 import { z } from "zod";
-
 
 export const loginFormSchema = z.object({
     username: z.string()
@@ -12,17 +9,4 @@ export const loginFormSchema = z.object({
 })
 
 export type LoginFormSchema = z.infer<typeof loginFormSchema>
-
-// const AuthContext = createContext<any>(undefined)
-
-// export const AuthProvider = () => {
-//     return (
-//         <AuthContext.Provider value={{}}>
-//         </AuthContext.Provider>
-//     )
-// }
-
-// export const useAuthContext = () => {
-//     return useContext(AuthContext)
-// }
 

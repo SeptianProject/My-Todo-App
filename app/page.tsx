@@ -69,7 +69,7 @@ const page = () => {
               type='password'
               rest={{ ...register('password') }}
               error={formState.errors.password}
-              txtError={formState.errors.username?.message}
+              txtError={formState.errors.password?.message}
             />
           </div>
 
