@@ -1,42 +1,28 @@
 'use client'
+import { createContext, useContext } from "react";
+import { z } from "zod";
 
-import { createContext, useContext, useEffect, useRef, useState } from "react";
 
-const AuthContext = createContext<any>(undefined);
+export const loginFormSchema = z.object({
+    username: z.string()
+        .min(3, 'Username minimal 3 karakter')
+        .max(15, 'Username maksimal 16 karakter'),
+    password: z.string()
+        .min(6, 'Password minimal 6 karakter')
+})
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const inputRef: any = useRef()
+export type LoginFormSchema = z.infer<typeof loginFormSchema>
 
-    const [user, setUser] = useState(
-        localStorage.getItem('users')
-            ? JSON.parse(localStorage.getItem('users'))
-            : []
-    )
-    const createUser = () => {
-        const inputText = inputRef.current.value.trim()
-        if (inputText === '') return;
+// const AuthContext = createContext<any>(undefined)
 
-        const newUser = {
-            id: Date.now(),
-            username: inputText,
-            password: 'password'
-        }
-        setUser((user: any) => [...user, newUser])
+// export const AuthProvider = () => {
+//     return (
+//         <AuthContext.Provider value={{}}>
+//         </AuthContext.Provider>
+//     )
+// }
 
-        inputRef.current.value = '';
-    }
+// export const useAuthContext = () => {
+//     return useContext(AuthContext)
+// }
 
-    useEffect(() => {
-        localStorage.setItem('users', JSON.stringify(user))
-    }, [user])
-
-    return (
-        <AuthContext.Provider value={{ inputRef, user, createUser }} >
-            {children}
-        </AuthContext.Provider>
-    )
-}
-
-export const useAuthContext = () => {
-    return useContext(AuthContext);
-}

@@ -1,30 +1,41 @@
-import React from 'react'
-import { formFieldLogin } from './assets'
-import { useTheme } from '@/context/ThemeContext'
+import React, { HTMLInputTypeAttribute } from 'react'
 
-const FormField = ({ inputRef }: { inputRef: any }) => {
-    const { dark } = useTheme()
+type FormFieldProps = {
+    id: string
+    label: string
+    placeholder: string
+    type: HTMLInputTypeAttribute
+    inputRef?: any
+    theme?: any
+    txtError?: any
+    error?: any
+    rest?: any
+}
+
+const FormField = ({ id, label, placeholder, type, inputRef, theme, txtError, error, rest }: FormFieldProps) => {
 
     return (
-        <>
-            {
-                formFieldLogin.map((field, index) => (
-                    <div key={index} className="flex flex-col gap-y-2">
-                        <label htmlFor={field.id}
-                            className={`text-sm font-medium transition-all 
-                            duration-300 transform w-20 ${dark ? 'text-white' : 'text-dark'}`}>
-                            {field.label}
-                        </label>
-                        <input autoComplete='true' placeholder={field.placeholder}
-                            id={field.id} name={field.id} type={field.type} ref={inputRef}
-                            className='border-2 box-border border-slate-400 rounded-md py-2 px-4 
+        <div className='box-border '>
+            <div className="flex flex-col gap-y-2">
+                <label htmlFor={id}
+                    className={`text-sm font-medium transition-all 
+                            duration-300 transform w-20 ${theme ? 'text-white' : 'text-dark'}`}>
+                    {label}
+                </label>
+                <input autoComplete='true' placeholder={placeholder}
+                    id={id} name={id} type={type} ref={inputRef}
+                    className='border-2 box-border border-slate-400 rounded-md py-2 px-4 
                             text-start text-sm font-medium focus:border-primary 
                             outline-none select-none transition-all duration-300'
-                        />
-                    </div>
-                ))
-            }
-        </>
+                    {...rest}
+                />
+            </div>
+            <div className='mt-1'>
+                {error && <p className={`text-xs text-red-500 font-semibold`}>
+                    {txtError}
+                </p>}
+            </div>
+        </div>
     )
 }
 
