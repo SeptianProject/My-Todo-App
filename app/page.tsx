@@ -7,22 +7,28 @@ import { useTheme } from '@/context/ThemeContext'
 import FormField from '@/components/FormField'
 import Button from '@/components/Button'
 import { useForm } from 'react-hook-form'
-import { loginFormSchema, LoginFormSchema } from '@/context/AuthContext'
+import { loginFormSchema, LoginFormSchema, useAuth } from '@/context/AuthContext'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 
 
 const page = () => {
+  const { createUser } = useAuth()
   const { dark, toggleTheme } = useTheme()
+  const router = useRouter()
+
   const { register, handleSubmit, formState } = useForm<LoginFormSchema>({
     resolver: zodResolver(loginFormSchema)
   })
 
   const onSubmit = handleSubmit((values) => {
-    alert(`Username: ${values.username} || Password: ${values.password}`)
+    createUser(values.username, values.password)
+    router.push('/todo')
+    alert('Username : ' + values.username + ' & ' + 'Password : ' + values.password)
   })
 
   return (
-    <div className={`${dark ? 'bg-dark' : 'bg-white'} transition-all duration-500
+    <div className={`${dark ? 'bg-dark' : 'bg-white'} transition-all duration-500 container
     flex flex-col items-center justify-center min-h-screen selection:bg-primary selection:text-white`}>
       {/* Mode */}
       <div className='absolute top-24 sm:top-60 lg:top-20 flex items-center gap-x-3'>
@@ -37,14 +43,14 @@ const page = () => {
         </div>
       </div>
       {/* <Card /> */}
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} method='POST'>
         <Card>
           <div className='text-center'>
             <h1 className={`${dark ? 'text-white' : 'text-dark'} 
                 transition-all duration-700 text-lg md:text-xl 
                 font-semibold tracking-wide`}>
               Hello👋 Welcome
-              <span className='text-primary'>Back!!</span>
+              <span className='text-primary'> Back!!</span>
             </h1>
           </div>
 
@@ -73,9 +79,8 @@ const page = () => {
             />
           </div>
 
-          <div className='mt-8'>
-            <Button type={'submit'}
-              onclick={onSubmit} />
+          <div className='mt-7'>
+            <Button type={'submit'} onclick={onSubmit} />
           </div>
         </Card>
       </form>

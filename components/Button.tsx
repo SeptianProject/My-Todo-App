@@ -8,7 +8,7 @@ const Button = ({ type, onclick }: { type: "submit", onclick: any | undefined })
             hover:border-primary hover:shadow-custom2 hover:shadow-primary 
             transition-all duration-300 hover:translate-y-2
             py-1 px-4' type={type} onClick={onclick}>
-            Sign Up
+            Login
         </button>
     )
 }
